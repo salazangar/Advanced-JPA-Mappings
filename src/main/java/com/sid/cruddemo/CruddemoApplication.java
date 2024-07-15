@@ -29,8 +29,25 @@ public class CruddemoApplication {
 //			createInstructorWithCourses(appDAO);
 //			findCoursesForInstructor(appDAO);
 //			findInstructorWithCoursesJoinFetch(appDAO);
-			updateInstructor(appDAO);
+//			updateInstructor(appDAO);
+			updateCourse(appDAO);
 		};
+	}
+
+	private void updateCourse(AppDAO appDAO) {
+
+		int theId = 10;
+
+		// find the course
+		System.out.println("Finding course with id:" + theId);
+		Course tempCourse = appDAO.findCourseById(theId);
+
+		// update the course
+		tempCourse.setTitle("Go Lang by Gooogle");
+
+		appDAO.update(tempCourse);
+
+		System.out.println("Done");
 	}
 
 	private void updateInstructor(AppDAO appDAO) {
