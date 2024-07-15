@@ -9,6 +9,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.List;
+
 @SpringBootApplication
 public class CruddemoApplication {
 
@@ -24,8 +26,31 @@ public class CruddemoApplication {
 //			deleteInstructor(appDAO);
 //			findInstructorDetail(appDAO);
 //			deleteInstructorDetail(appDAO);
-			createInstructorWithCourses(appDAO);
+//			createInstructorWithCourses(appDAO);
+			findCoursesForInstructor(appDAO);
 		};
+	}
+
+	private void findCoursesForInstructor(AppDAO appDAO) {
+
+		int theId = 1;
+		System.out.println("Finding instructor with id :" + theId);
+
+		Instructor theInstructor = appDAO.findInstructorById(theId);  // does not give courses cos courses is LAZY loaded
+
+		System.out.println("the Instructor : " + theInstructor);
+
+		//		System.out.println("the associated Courses :" + theInstructor.getCourses()); [does not work for lazy load]
+
+		// find the courses for instructor
+		System.out.println("Finding courses for instructor id: " + theId);
+		List<Course> courses = appDAO.findCoursesByInstructorId(theId);
+
+		theInstructor.setCourses(courses);
+
+		System.out.println("The associated courses : " + theInstructor.getCourses());
+
+		System.out.println("Done!");
 	}
 
 	private void createInstructorWithCourses(AppDAO appDAO) {

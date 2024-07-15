@@ -41,8 +41,10 @@ public class Instructor {
     @JoinColumn(name = "instructor_detail_id")
     private InstructorDetail instructorDetail;
 
-    @OneToMany(mappedBy = "instructor",cascade = {CascadeType.DETACH, CascadeType.MERGE,
-                                     CascadeType.PERSIST,CascadeType.REFRESH})  // since we do not want cascading delete
+    @OneToMany(mappedBy = "instructor",
+            fetch = FetchType.LAZY, // lazy is default already
+            cascade = {CascadeType.DETACH, CascadeType.MERGE,
+                    CascadeType.PERSIST,CascadeType.REFRESH})  // since we do not want cascading delete
     List<Course> courses;
 
     public Instructor(){
