@@ -128,4 +128,10 @@ public class AppDAOImpl implements AppDAO{
         // delete course
         entityManager.remove(course);
     }
+
+    @Override
+    @Transactional
+    public void save(Course course) {
+        entityManager.persist(course);   // will also save all associated reviews
+    }
 }
