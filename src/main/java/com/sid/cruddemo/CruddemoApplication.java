@@ -26,9 +26,22 @@ public class CruddemoApplication {
 
 //			findStudentAndCoursesById(appDAO);
 
-			addMoreCoursesForStudent(appDAO);
+//			addMoreCoursesForStudent(appDAO);
 
+//			deleteCourse(appDAO);
+
+			deleteStudent(appDAO);
 		};
+	}
+
+	private void deleteStudent(AppDAO appDAO) {
+
+		int theId = 1;
+		System.out.println("deleting student id:" + theId);
+
+		appDAO.deleteStudentById(theId);
+
+		System.out.println("Done!");
 	}
 
 	private void addMoreCoursesForStudent(AppDAO appDAO) {
@@ -143,7 +156,7 @@ public class CruddemoApplication {
 
 		System.out.println("Deleting Course id:" + theId);
 
-		appDAO.deleteCourseById(theId);
+		appDAO.deleteCourseById(theId);   // automatically removes association with student
 
 		System.out.println("Done!");
 	}
