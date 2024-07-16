@@ -1,10 +1,7 @@
 package com.sid.cruddemo;
 
 import com.sid.cruddemo.dao.AppDAO;
-import com.sid.cruddemo.entity.Course;
-import com.sid.cruddemo.entity.Instructor;
-import com.sid.cruddemo.entity.InstructorDetail;
-import com.sid.cruddemo.entity.Review;
+import com.sid.cruddemo.entity.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,8 +20,30 @@ public class CruddemoApplication {
 	public CommandLineRunner commandLineRunner(AppDAO appDAO){
 		return runner -> {
 
+			createCourseAndStudents(appDAO);
 
 		};
+	}
+
+	private void createCourseAndStudents(AppDAO appDAO) {
+
+		// create a course
+		Course course = new Course("God of War - The Definitive Guide");
+
+		// create the students
+		Student tempStudent1 = new Student("John", "Doe", "john@gmail.com");
+		Student tempStudent2 = new Student("Susan", "Wakajaka", "susan@gmail.com");
+
+		// add students to the course
+		course.addStudent(tempStudent1);
+		course.addStudent(tempStudent2);
+
+		// save the course and associated students
+		System.out.println("Saving the course: " + course);
+		System.out.println("The associated Students : " + course.getStudents());
+		appDAO.save(course);   // will save the students also since cascade persist
+
+		System.out.println("Done!");
 	}
 
 	private void deleteCourseAndReviews(AppDAO appDAO) {
